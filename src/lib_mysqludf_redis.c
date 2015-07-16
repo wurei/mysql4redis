@@ -83,7 +83,7 @@ void mysql4redis_destory()
             mysql4redis->log_file = NULL;
         }
         free(mysql4redis);
-        mysql2redis = NULL;
+        mysql4redis = NULL;
     }
 }
 
@@ -91,11 +91,11 @@ mysql4redis_t *
 mysql4redis_new()
 {
     if (mysql4redis) {
-        return mysql2redis;
+        return mysql4redis;
     }
     mysql4redis = (mysql4redis_t *)malloc(sizeof(mysql4redis_t));
     if (mysql4redis == NULL) {
-        printf("init mysql2redis failed!\n");
+        printf("init mysql4redis failed!\n");
         return NULL;
     }
     mysql4redis->log_file = NULL;
