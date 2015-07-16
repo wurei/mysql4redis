@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+
+Name: libmysql2redis
+Description: rei's libmysql2redis udf
+Version: @VERSION@
+Libs: -L${libdir} -lmysq2redis
+Cflags: -I${includedir}
+
