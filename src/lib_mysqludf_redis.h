@@ -95,7 +95,7 @@ static struct config cfg = { .tcp = { .host = "127.0.0.1", .port = 6379 },
         .log_file = "/tmp/redis_udf.log", .debug = 0, .type = CONN_TCP,
         .worker = 1 };
 
-typedef struct _mysql2redis_t mysql2redis_t;
+typedef struct _mysql4redis_t mysql4redis_t;
 
 /**
  set server info command.
@@ -137,15 +137,15 @@ void redis_context_destory(redisContext *rc);
 
 #define debug_print(...) \
    do { \
-	   if (cfg.debug && mysql2redis->log_file) {\
-	   	   fprintf(mysql2redis->log_file,  __VA_ARGS__);fflush(mysql2redis->log_file);\
+	   if (cfg.debug && mysql4redis->log_file) {\
+	   	   fprintf(mysql4redis->log_file,  __VA_ARGS__);fflush(mysql4redis->log_file);\
 	   } \
    } while (0)
 
 #define info_print(...) \
    do { \
 	   if (mysql2redis->log_file) {\
-	   	   fprintf(mysql2redis->log_file,  __VA_ARGS__);fflush(mysql2redis->log_file); \
+	   	   fprintf(mysql4redis->log_file,  __VA_ARGS__);fflush(mysql4redis->log_file); \
 	   } \
    } while (0)
 
