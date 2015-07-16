@@ -27,7 +27,7 @@ AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 
 AC_CONFIG_FILES([
-libmysql2redis.pc
+libmysql4redis.pc
 Makefile
 src/Makefile
 po/Makefile.in
