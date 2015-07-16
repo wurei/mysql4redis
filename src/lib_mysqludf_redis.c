@@ -3,7 +3,7 @@
  * @brief The mysql udf for redis
  * Created by rei
  *
- * libmysq2redis - mysql udf for redis
+ * libmysq4redis - mysql udf for redis
  * Copyright (C) 2015 Xi'an Tomoon Tech Co.,Ltd. All rights are served.
  * web: http://www.tomoon.cn
  *
@@ -12,7 +12,7 @@
 
 #include "lib_mysqludf_redis.h"
 
-struct _mysql2redis_t {
+struct _mysql4redis_t {
     threadpool *thread_pool;
     FILE *log_file;
     void *user_data;
@@ -20,7 +20,7 @@ struct _mysql2redis_t {
 
 //static pthread_mutex_t redis_context_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-static mysql2redis_t *mysql2redis = NULL;
+static mysql4redis_t *mysql4redis = NULL;
 
 void *
 _do_redis_command(thread *thread_p, void *data)
@@ -71,43 +71,43 @@ void free_command(struct redis_command *cmd)
     }
 }
 
-void mysql2redis_destory()
+void mysql4redis_destory()
 {
-    if (mysql2redis) {
-        if (mysql2redis->thread_pool) {
-            thpool_destroy(mysql2redis->thread_pool);
-            mysql2redis->thread_pool = NULL;
+    if (mysql4redis) {
+        if (mysql4redis->thread_pool) {
+            thpool_destroy(mysql4redis->thread_pool);
+            mysql4redis->thread_pool = NULL;
         }
-        if (mysql2redis->log_file) {
-            fclose(mysql2redis->log_file);
-            mysql2redis->log_file = NULL;
+        if (mysql4redis->log_file) {
+            fclose(mysql4redis->log_file);
+            mysql4redis->log_file = NULL;
         }
-        free(mysql2redis);
+        free(mysql4redis);
         mysql2redis = NULL;
     }
 }
 
-mysql2redis_t *
-mysql2redis_new()
+mysql4redis_t *
+mysql4redis_new()
 {
-    if (mysql2redis) {
+    if (mysql4redis) {
         return mysql2redis;
     }
-    mysql2redis = (mysql2redis_t *)malloc(sizeof(mysql2redis_t));
-    if (mysql2redis == NULL) {
+    mysql4redis = (mysql4redis_t *)malloc(sizeof(mysql4redis_t));
+    if (mysql4redis == NULL) {
         printf("init mysql2redis failed!\n");
         return NULL;
     }
-    mysql2redis->log_file = NULL;
+    mysql4redis->log_file = NULL;
     if (cfg.debug) {
-        mysql2redis->log_file = fopen(cfg.log_file, "a+");
+        mysql4redis->log_file = fopen(cfg.log_file, "a+");
     }
-    mysql2redis->thread_pool = (threadpool *) thpool_init(cfg.worker);
-    if (mysql2redis->thread_pool == NULL) {
-        mysql2redis_destory(mysql2redis);
+    mysql4redis->thread_pool = (threadpool *) thpool_init(cfg.worker);
+    if (mysql4redis->thread_pool == NULL) {
+        mysql4redis_destory(mysql4redis);
         return NULL;
     }
-    return mysql2redis;
+    return mysql4redis;
 }
 
 redisContext *
@@ -125,7 +125,7 @@ redis_context_new()
         rc = redisConnectUnix(cfg.unix_sock.path);
     }
 
-    if (rc->err && mysql2redis->log_file) {
+    if (rc->err && mysql4redis->log_file) {
         info_print("Connection error: %s\n", rc->errstr);
         return rc;
     }
@@ -176,7 +176,7 @@ my_bool redis_servers_init(UDF_INIT *initid __attribute__((__unused__)),
         strncpy(cfg.password, (char *) args->args[2], sizeof(cfg.password));
     }
 
-    if (mysql2redis_new() == NULL) {
+    if (mysql4redis_new() == NULL) {
         strncpy(message, "init failed", MYSQL_ERRMSG_SIZE);
         goto failed;
     }
@@ -210,7 +210,7 @@ my_bool redis_command_init(UDF_INIT *initid __attribute__((__unused__)),
             && args->arg_type[1] == STRING_RESULT
             && args->arg_type[2] == STRING_RESULT) {
         args->maybe_null = NULL;
-        if (!mysql2redis) {
+        if (!mysql4redis) {
             snprintf(message, MYSQL_ERRMSG_SIZE, "redis not init");
             return 1;
         }
@@ -259,14 +259,14 @@ my_ulonglong redis_command(UDF_INIT *initid __attribute__((__unused__)),
         command->argvlen[i] = args->lengths[i];
     }
 
-    if (mysql2redis->thread_pool) {
-        res = thpool_add_work(mysql2redis->thread_pool, _do_redis_command,
+    if (mysql4redis->thread_pool) {
+        res = thpool_add_work(mysql4redis->thread_pool, _do_redis_command,
                 command);
         if (res == -1) {
             free_command(command);
             command = NULL;
         }
-        info_print("queue size=%d\n", thpool_get_queue_size(mysql2redis->thread_pool));
+        info_print("queue size=%d\n", thpool_get_queue_size(mysql4redis->thread_pool));
     }
 
     return r;
@@ -287,6 +287,6 @@ my_ulonglong redis_destory(UDF_INIT *initid __attribute__((__unused__)),
         UDF_ARGS *args, char *is_null __attribute__((__unused__)),
         char *error __attribute__((__unused__)))
 {
-    mysql2redis_destory();
+    mysql4redis_destory();
     return 0;
 }
