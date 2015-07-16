@@ -1,4 +1,4 @@
-AC_INIT([libmysql2readis], [1.0.0])
+AC_INIT([libmysql4readis], [1.0.0])
 
 AC_SUBST(PACKAGE_NAME)
 AC_SUBST(PACKAGE_VERSION)
