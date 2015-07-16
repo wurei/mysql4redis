@@ -1,6 +1,6 @@
 /**
  * @file lib_mysqludf_redis.c
- * @brief The mysql udf to redis
+ * @brief The mysql udf for redis
  * Created by rei
  *
  * libmysq2redis - mysql udf for redis
