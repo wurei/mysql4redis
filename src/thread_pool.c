@@ -1,9 +1,9 @@
 /**
  * @file thread_pool.c
- * @brief The thread pool for mysql to redis
+ * @brief The thread pool for mysql4redis
  * Created by rei
  *
- * libmysq2redis - mysql udf for redis
+ * libmysq4redis - mysql udf for redis
  * Copyright (C) 2015 Xi'an Tomoon Tech Co.,Ltd. All rights are served.
  * web: http://www.tomoon.cn
  *
