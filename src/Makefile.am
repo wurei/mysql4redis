@@ -1,6 +1,6 @@
-lib_LTLIBRARIES = libmysql2redis.la
+lib_LTLIBRARIES = libmysql4redis.la
 
-libmysql2redis_la_SOURCES = \
+libmysql4redis_la_SOURCES = \
 	lib_mysqludf_redis.c \
 	thread_pool.c \
     hiredis/async.c \
@@ -10,8 +10,8 @@ libmysql2redis_la_SOURCES = \
     hiredis/read.c \
     hiredis/sds.c
 
-libmysql2redis_la_CFLAGS = `mysql_config --cflags`
-libmysql2redis_la_LDFLAGS = -version-info 1:0:0 -no-undefined `mysql_config --libs`
+libmysql4redis_la_CFLAGS = `mysql_config --cflags`
+libmysql4redis_la_LDFLAGS = -version-info 1:0:0 -no-undefined `mysql_config --libs`
 
-libmysql2redisincludedir = ${includedir}
-libmysql2redisinclude_HEADERS = lib_mysqludf_redis.h
+libmysql4redisincludedir = ${includedir}
+libmysql4redisinclude_HEADERS = lib_mysqludf_redis.h
