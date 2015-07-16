@@ -1,8 +1,8 @@
 lib_LTLIBRARIES = libmysql4redis.la
 
 libmysql4redis_la_SOURCES = \
-	lib_mysqludf_redis.c \
-	thread_pool.c \
+    lib_mysqludf_redis.c \
+    thread_pool.c \
     hiredis/async.c \
     hiredis/dict.c \
     hiredis/hiredis.c \
