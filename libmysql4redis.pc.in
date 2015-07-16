@@ -8,4 +8,3 @@ Description: rei's libmysql4redis udf
 Version: @VERSION@
 Libs: -L${libdir} -lmysq4redis
 Cflags: -I${includedir}
-
