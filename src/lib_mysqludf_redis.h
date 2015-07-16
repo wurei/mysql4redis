@@ -1,9 +1,9 @@
 /**
  * @file lib_mysqudf_redis.h
- * @brief The mysql udf to redis
+ * @brief The mysql udf for redis
  * Created by rei
  *
- * libmysq2redis - mysql udf for redis
+ * libmysq4redis - mysql udf for redis
  * Copyright (C) 2015 Xi'an Tomoon Tech Co.,Ltd. All rights are served.
  * web: http://www.tomoon.cn
  *
