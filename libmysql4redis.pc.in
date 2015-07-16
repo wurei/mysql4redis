@@ -3,9 +3,9 @@ exec_prefix=@exec_prefix@
 libdir=@libdir@
 includedir=@includedir@
 
-Name: libmysql2redis
-Description: rei's libmysql2redis udf
+Name: libmysql4redis
+Description: rei's libmysql4redis udf
 Version: @VERSION@
-Libs: -L${libdir} -lmysq2redis
+Libs: -L${libdir} -lmysq4redis
 Cflags: -I${includedir}
 
