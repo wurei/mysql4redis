@@ -40,7 +40,7 @@
 #define DICT_ERR 1
 
 #ifdef __GNUC__
-    #define MAYBE_UNUSED __attribute__((unused))
+    #define MAYBE_UNUSED __attribute__((__unused__))
 #elif defined _MSC_VER
     #pragma warning(disable: Cxxxxx)
     #define MAYBE_UNUSED

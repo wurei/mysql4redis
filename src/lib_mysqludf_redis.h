@@ -144,7 +144,7 @@ void redis_context_destory(redisContext *rc);
 
 #define info_print(...) \
    do { \
-	   if (mysql2redis->log_file) {\
+	   if (mysql4redis->log_file) {\
 	   	   fprintf(mysql4redis->log_file,  __VA_ARGS__);fflush(mysql4redis->log_file); \
 	   } \
    } while (0)
